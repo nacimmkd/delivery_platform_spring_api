@@ -1,11 +1,11 @@
-package com.deliveryplatform.users;
+package com.deliveryplatform.profiles;
 
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-15T02:24:07+0100",
+    date = "2026-03-17T01:32:33+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component

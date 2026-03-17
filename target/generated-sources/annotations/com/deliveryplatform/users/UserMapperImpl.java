@@ -1,5 +1,8 @@
 package com.deliveryplatform.users;
 
+import com.deliveryplatform.profiles.Profile;
+import com.deliveryplatform.profiles.ProfileDto;
+import com.deliveryplatform.profiles.ProfileRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-15T02:24:07+0100",
+    date = "2026-03-17T01:32:34+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
