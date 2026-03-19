@@ -2,7 +2,6 @@ package com.deliveryplatform.users;
 
 import com.deliveryplatform.profiles.Profile;
 import com.deliveryplatform.profiles.ProfileDto;
-import com.deliveryplatform.profiles.ProfileRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,14 +10,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-19T04:22:34+0100",
+    date = "2026-03-19T05:07:29+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public UserDto toDto(User user) {
+    public UserDto.UserResponse toDto(User user) {
         if ( user == null ) {
             return null;
         }
@@ -27,38 +26,38 @@ public class UserMapperImpl implements UserMapper {
         String email = null;
         Role role = null;
         LocalDateTime registeredAt = null;
-        ProfileDto profile = null;
+        ProfileDto.ProfileResponse profile = null;
 
         id = user.getId();
         email = user.getEmail();
         role = user.getRole();
         registeredAt = user.getRegisteredAt();
-        profile = profileToProfileDto( user.getProfile() );
+        profile = profileToProfileResponse( user.getProfile() );
 
         boolean isVerified = false;
         boolean isActive = false;
 
-        UserDto userDto = new UserDto( id, email, role, isVerified, isActive, registeredAt, profile );
+        UserDto.UserResponse userResponse = new UserDto.UserResponse( id, email, role, isVerified, isActive, registeredAt, profile );
 
-        return userDto;
+        return userResponse;
     }
 
     @Override
-    public User toEntity(RegisterUserRequest registerUserRequest) {
-        if ( registerUserRequest == null ) {
+    public User toEntity(UserDto.UserRequest request) {
+        if ( request == null ) {
             return null;
         }
 
         User.UserBuilder user = User.builder();
 
-        user.email( registerUserRequest.email() );
-        user.password( registerUserRequest.password() );
-        user.profile( profileRequestToProfile( registerUserRequest.profile() ) );
+        user.email( request.email() );
+        user.password( request.password() );
+        user.profile( profileRequestToProfile( request.profile() ) );
 
         return user.build();
     }
 
-    protected ProfileDto profileToProfileDto(Profile profile) {
+    protected ProfileDto.ProfileResponse profileToProfileResponse(Profile profile) {
         if ( profile == null ) {
             return null;
         }
@@ -79,12 +78,12 @@ public class UserMapperImpl implements UserMapper {
         totalOrders = profile.getTotalOrders();
         iban = profile.getIban();
 
-        ProfileDto profileDto = new ProfileDto( firstName, lastName, phone, avgRating, totalDeliveries, totalOrders, iban );
+        ProfileDto.ProfileResponse profileResponse = new ProfileDto.ProfileResponse( firstName, lastName, phone, avgRating, totalDeliveries, totalOrders, iban );
 
-        return profileDto;
+        return profileResponse;
     }
 
-    protected Profile profileRequestToProfile(ProfileRequest profileRequest) {
+    protected Profile profileRequestToProfile(ProfileDto.ProfileRequest profileRequest) {
         if ( profileRequest == null ) {
             return null;
         }
