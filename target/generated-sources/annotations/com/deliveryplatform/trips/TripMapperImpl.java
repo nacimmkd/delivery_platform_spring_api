@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-23T23:15:37+0100",
+    date = "2026-03-24T00:47:21+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -49,7 +49,7 @@ public class TripMapperImpl implements TripMapper {
         price = trip.getPrice();
         status = trip.getStatus();
         notes = trip.getNotes();
-        stops = toStopResponses( trip.getStops() );
+        stops = tripStopListToTripStopResponseList( trip.getStops() );
 
         TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, maxVolumeM3, maxWeightKg, price, status, notes, stops );
 
@@ -127,9 +127,16 @@ public class TripMapperImpl implements TripMapper {
         }
     }
 
-    @Override
-    public TripStopDto.TripStopResponse toStopResponse(TripStop stop) {
-        if ( stop == null ) {
+    private UUID tripUserId(Trip trip) {
+        User user = trip.getUser();
+        if ( user == null ) {
+            return null;
+        }
+        return user.getId();
+    }
+
+    protected TripStopDto.TripStopResponse tripStopToTripStopResponse(TripStop tripStop) {
+        if ( tripStop == null ) {
             return null;
         }
 
@@ -137,35 +144,26 @@ public class TripMapperImpl implements TripMapper {
         Integer stopOrder = null;
         Address address = null;
 
-        id = stop.getId();
-        stopOrder = stop.getStopOrder();
-        address = stop.getAddress();
+        id = tripStop.getId();
+        stopOrder = tripStop.getStopOrder();
+        address = tripStop.getAddress();
 
         TripStopDto.TripStopResponse tripStopResponse = new TripStopDto.TripStopResponse( id, stopOrder, address );
 
         return tripStopResponse;
     }
 
-    @Override
-    public List<TripStopDto.TripStopResponse> toStopResponses(List<TripStop> stops) {
-        if ( stops == null ) {
+    protected List<TripStopDto.TripStopResponse> tripStopListToTripStopResponseList(List<TripStop> list) {
+        if ( list == null ) {
             return null;
         }
 
-        List<TripStopDto.TripStopResponse> list = new ArrayList<TripStopDto.TripStopResponse>( stops.size() );
-        for ( TripStop tripStop : stops ) {
-            list.add( toStopResponse( tripStop ) );
+        List<TripStopDto.TripStopResponse> list1 = new ArrayList<TripStopDto.TripStopResponse>( list.size() );
+        for ( TripStop tripStop : list ) {
+            list1.add( tripStopToTripStopResponse( tripStop ) );
         }
 
-        return list;
-    }
-
-    private UUID tripUserId(Trip trip) {
-        User user = trip.getUser();
-        if ( user == null ) {
-            return null;
-        }
-        return user.getId();
+        return list1;
     }
 
     protected Address addressRequestToAddress(AddressRequest addressRequest) {

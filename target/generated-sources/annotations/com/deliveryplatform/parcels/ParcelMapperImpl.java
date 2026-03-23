@@ -2,6 +2,7 @@ package com.deliveryplatform.parcels;
 
 import com.deliveryplatform.common.addresses.Address;
 import com.deliveryplatform.common.addresses.AddressRequest;
+import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-23T23:15:37+0100",
+    date = "2026-03-24T00:47:21+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -23,6 +24,7 @@ public class ParcelMapperImpl implements ParcelMapper {
             return null;
         }
 
+        UUID userId = null;
         UUID id = null;
         String description = null;
         BigDecimal weightKg = null;
@@ -35,6 +37,7 @@ public class ParcelMapperImpl implements ParcelMapper {
         LocalDate deadlineDate = null;
         OffsetDateTime createdAt = null;
 
+        userId = parcelUserId( parcel );
         id = parcel.getId();
         description = parcel.getDescription();
         weightKg = parcel.getWeightKg();
@@ -47,7 +50,7 @@ public class ParcelMapperImpl implements ParcelMapper {
         deadlineDate = parcel.getDeadlineDate();
         createdAt = parcel.getCreatedAt();
 
-        ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, description, weightKg, size, price, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
+        ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, userId, description, weightKg, size, price, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelResponse;
     }
@@ -102,6 +105,14 @@ public class ParcelMapperImpl implements ParcelMapper {
         else {
             parcel.setDropoffAddress( null );
         }
+    }
+
+    private UUID parcelUserId(Parcel parcel) {
+        User user = parcel.getUser();
+        if ( user == null ) {
+            return null;
+        }
+        return user.getId();
     }
 
     protected Address addressRequestToAddress(AddressRequest addressRequest) {
