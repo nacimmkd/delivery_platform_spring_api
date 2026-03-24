@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-24T00:47:21+0100",
+    date = "2026-03-24T05:17:54+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -36,7 +36,7 @@ public class TripMapperImpl implements TripMapper {
         BigDecimal price = null;
         TripStatus status = null;
         String notes = null;
-        List<TripStopDto.TripStopResponse> stops = null;
+        List<TripStopDto.StopResponse> stops = null;
 
         userId = tripUserId( trip );
         id = trip.getId();
@@ -49,7 +49,7 @@ public class TripMapperImpl implements TripMapper {
         price = trip.getPrice();
         status = trip.getStatus();
         notes = trip.getNotes();
-        stops = tripStopListToTripStopResponseList( trip.getStops() );
+        stops = tripStopListToStopResponseList( trip.getStops() );
 
         TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, maxVolumeM3, maxWeightKg, price, status, notes, stops );
 
@@ -73,7 +73,7 @@ public class TripMapperImpl implements TripMapper {
         trip.price( request.price() );
         trip.maxDetourKm( request.maxDetourKm() );
         trip.notes( request.notes() );
-        trip.stops( tripStopRequestListToTripStopList( request.stops() ) );
+        trip.stops( stopRequestListToTripStopList( request.stops() ) );
 
         return trip.build();
     }
@@ -110,7 +110,7 @@ public class TripMapperImpl implements TripMapper {
         trip.setMaxDetourKm( request.maxDetourKm() );
         trip.setNotes( request.notes() );
         if ( trip.getStops() != null ) {
-            List<TripStop> list = tripStopRequestListToTripStopList( request.stops() );
+            List<TripStop> list = stopRequestListToTripStopList( request.stops() );
             if ( list != null ) {
                 trip.getStops().clear();
                 trip.getStops().addAll( list );
@@ -120,7 +120,7 @@ public class TripMapperImpl implements TripMapper {
             }
         }
         else {
-            List<TripStop> list = tripStopRequestListToTripStopList( request.stops() );
+            List<TripStop> list = stopRequestListToTripStopList( request.stops() );
             if ( list != null ) {
                 trip.setStops( list );
             }
@@ -135,7 +135,7 @@ public class TripMapperImpl implements TripMapper {
         return user.getId();
     }
 
-    protected TripStopDto.TripStopResponse tripStopToTripStopResponse(TripStop tripStop) {
+    protected TripStopDto.StopResponse tripStopToStopResponse(TripStop tripStop) {
         if ( tripStop == null ) {
             return null;
         }
@@ -148,19 +148,19 @@ public class TripMapperImpl implements TripMapper {
         stopOrder = tripStop.getStopOrder();
         address = tripStop.getAddress();
 
-        TripStopDto.TripStopResponse tripStopResponse = new TripStopDto.TripStopResponse( id, stopOrder, address );
+        TripStopDto.StopResponse stopResponse = new TripStopDto.StopResponse( id, stopOrder, address );
 
-        return tripStopResponse;
+        return stopResponse;
     }
 
-    protected List<TripStopDto.TripStopResponse> tripStopListToTripStopResponseList(List<TripStop> list) {
+    protected List<TripStopDto.StopResponse> tripStopListToStopResponseList(List<TripStop> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<TripStopDto.TripStopResponse> list1 = new ArrayList<TripStopDto.TripStopResponse>( list.size() );
+        List<TripStopDto.StopResponse> list1 = new ArrayList<TripStopDto.StopResponse>( list.size() );
         for ( TripStop tripStop : list ) {
-            list1.add( tripStopToTripStopResponse( tripStop ) );
+            list1.add( tripStopToStopResponse( tripStop ) );
         }
 
         return list1;
@@ -181,29 +181,29 @@ public class TripMapperImpl implements TripMapper {
         return address.build();
     }
 
-    protected TripStop tripStopRequestToTripStop(TripStopDto.TripStopRequest tripStopRequest) {
-        if ( tripStopRequest == null ) {
+    protected TripStop stopRequestToTripStop(TripStopDto.StopRequest stopRequest) {
+        if ( stopRequest == null ) {
             return null;
         }
 
         TripStop.TripStopBuilder tripStop = TripStop.builder();
 
-        if ( tripStopRequest.stopOrder() != null ) {
-            tripStop.stopOrder( tripStopRequest.stopOrder() );
+        if ( stopRequest.stopOrder() != null ) {
+            tripStop.stopOrder( stopRequest.stopOrder() );
         }
-        tripStop.address( addressRequestToAddress( tripStopRequest.address() ) );
+        tripStop.address( addressRequestToAddress( stopRequest.address() ) );
 
         return tripStop.build();
     }
 
-    protected List<TripStop> tripStopRequestListToTripStopList(List<TripStopDto.TripStopRequest> list) {
+    protected List<TripStop> stopRequestListToTripStopList(List<TripStopDto.StopRequest> list) {
         if ( list == null ) {
             return null;
         }
 
         List<TripStop> list1 = new ArrayList<TripStop>( list.size() );
-        for ( TripStopDto.TripStopRequest tripStopRequest : list ) {
-            list1.add( tripStopRequestToTripStop( tripStopRequest ) );
+        for ( TripStopDto.StopRequest stopRequest : list ) {
+            list1.add( stopRequestToTripStop( stopRequest ) );
         }
 
         return list1;
