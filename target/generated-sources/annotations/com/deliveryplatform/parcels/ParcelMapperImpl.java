@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T01:34:00+0100",
+    date = "2026-03-25T02:19:10+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -29,7 +29,6 @@ public class ParcelMapperImpl implements ParcelMapper {
         String description = null;
         BigDecimal weightKg = null;
         ParcelSize size = null;
-        BigDecimal price = null;
         boolean fragile = false;
         GeoAddress pickupAddress = null;
         GeoAddress dropoffAddress = null;
@@ -42,7 +41,6 @@ public class ParcelMapperImpl implements ParcelMapper {
         description = parcel.getDescription();
         weightKg = parcel.getWeightKg();
         size = parcel.getSize();
-        price = parcel.getPrice();
         fragile = parcel.isFragile();
         pickupAddress = parcel.getPickupAddress();
         dropoffAddress = parcel.getDropoffAddress();
@@ -50,7 +48,7 @@ public class ParcelMapperImpl implements ParcelMapper {
         deadlineDate = parcel.getDeadlineDate();
         createdAt = parcel.getCreatedAt();
 
-        ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, userId, description, weightKg, size, price, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
+        ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, userId, description, weightKg, size, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelResponse;
     }
@@ -67,7 +65,6 @@ public class ParcelMapperImpl implements ParcelMapper {
         parcel.weightKg( parcelRequest.weightKg() );
         parcel.size( parcelRequest.size() );
         parcel.fragile( parcelRequest.fragile() );
-        parcel.price( parcelRequest.price() );
         parcel.deadlineDate( parcelRequest.deadlineDate() );
         parcel.pickupAddress( addressToGeoAddress( parcelRequest.pickupAddress() ) );
         parcel.dropoffAddress( addressToGeoAddress( parcelRequest.dropoffAddress() ) );
@@ -85,7 +82,6 @@ public class ParcelMapperImpl implements ParcelMapper {
         parcel.setWeightKg( request.weightKg() );
         parcel.setSize( request.size() );
         parcel.setFragile( request.fragile() );
-        parcel.setPrice( request.price() );
         parcel.setDeadlineDate( request.deadlineDate() );
         if ( request.pickupAddress() != null ) {
             if ( parcel.getPickupAddress() == null ) {
