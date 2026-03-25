@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T04:32:19+0100",
+    date = "2026-03-25T17:53:49+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -34,6 +34,7 @@ public class TripMapperImpl implements TripMapper {
         BigDecimal availableVolumeCm3 = null;
         BigDecimal availableWeightKg = null;
         BigDecimal pricePerKg = null;
+        boolean instantBooking = false;
         TripStatus status = null;
         String notes = null;
         List<TripStopDto.StopResponse> stops = null;
@@ -47,11 +48,12 @@ public class TripMapperImpl implements TripMapper {
         availableVolumeCm3 = trip.getAvailableVolumeCm3();
         availableWeightKg = trip.getAvailableWeightKg();
         pricePerKg = trip.getPricePerKg();
+        instantBooking = trip.isInstantBooking();
         status = trip.getStatus();
         notes = trip.getNotes();
         stops = tripStopListToStopResponseList( trip.getStops() );
 
-        TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, availableVolumeCm3, availableWeightKg, pricePerKg, status, notes, stops );
+        TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, availableVolumeCm3, availableWeightKg, pricePerKg, instantBooking, status, notes, stops );
 
         return tripResponse;
     }
@@ -71,6 +73,7 @@ public class TripMapperImpl implements TripMapper {
         trip.availableVolumeCm3( request.availableVolumeCm3() );
         trip.availableWeightKg( request.availableWeightKg() );
         trip.pricePerKg( request.pricePerKg() );
+        trip.instantBooking( request.instantBooking() );
         trip.maxDetourKm( request.maxDetourKm() );
         trip.notes( request.notes() );
         trip.stops( stopRequestListToTripStopList( request.stops() ) );
@@ -107,6 +110,7 @@ public class TripMapperImpl implements TripMapper {
         trip.setAvailableVolumeCm3( request.availableVolumeCm3() );
         trip.setAvailableWeightKg( request.availableWeightKg() );
         trip.setPricePerKg( request.pricePerKg() );
+        trip.setInstantBooking( request.instantBooking() );
         trip.setMaxDetourKm( request.maxDetourKm() );
         trip.setNotes( request.notes() );
         if ( trip.getStops() != null ) {
