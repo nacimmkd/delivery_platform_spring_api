@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T17:53:49+0100",
+    date = "2026-03-25T21:01:01+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class ParcelMapperImpl implements ParcelMapper {
 
     @Override
-    public ParcelDto.ParcelResponse toDto(Parcel parcel) {
+    public ParcelDto.ParcelResponse toPublicDto(Parcel parcel) {
         if ( parcel == null ) {
             return null;
         }
@@ -51,6 +51,43 @@ public class ParcelMapperImpl implements ParcelMapper {
         ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, userId, description, weightKg, size, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelResponse;
+    }
+
+    @Override
+    public ParcelDto.ParcelWithCodeResponse toDto(Parcel parcel) {
+        if ( parcel == null ) {
+            return null;
+        }
+
+        UUID id = null;
+        String description = null;
+        BigDecimal weightKg = null;
+        ParcelSize size = null;
+        boolean fragile = false;
+        String codeOTP = null;
+        GeoAddress pickupAddress = null;
+        GeoAddress dropoffAddress = null;
+        ParcelStatus status = null;
+        LocalDate deadlineDate = null;
+        OffsetDateTime createdAt = null;
+
+        id = parcel.getId();
+        description = parcel.getDescription();
+        weightKg = parcel.getWeightKg();
+        size = parcel.getSize();
+        fragile = parcel.isFragile();
+        codeOTP = parcel.getCodeOTP();
+        pickupAddress = parcel.getPickupAddress();
+        dropoffAddress = parcel.getDropoffAddress();
+        status = parcel.getStatus();
+        deadlineDate = parcel.getDeadlineDate();
+        createdAt = parcel.getCreatedAt();
+
+        UUID userId = null;
+
+        ParcelDto.ParcelWithCodeResponse parcelWithCodeResponse = new ParcelDto.ParcelWithCodeResponse( id, userId, description, weightKg, size, fragile, codeOTP, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
+
+        return parcelWithCodeResponse;
     }
 
     @Override
