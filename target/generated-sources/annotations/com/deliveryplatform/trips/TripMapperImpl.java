@@ -1,7 +1,7 @@
 package com.deliveryplatform.trips;
 
 import com.deliveryplatform.common.addresses.Address;
-import com.deliveryplatform.common.addresses.AddressRequest;
+import com.deliveryplatform.common.addresses.GeoAddress;
 import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-24T05:17:54+0100",
+    date = "2026-03-25T01:34:01+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -27,13 +27,13 @@ public class TripMapperImpl implements TripMapper {
 
         UUID userId = null;
         UUID id = null;
-        Address departure = null;
-        Address arrival = null;
+        GeoAddress departure = null;
+        GeoAddress arrival = null;
         LocalDate departureDate = null;
         LocalDate arrivalDate = null;
-        BigDecimal maxVolumeM3 = null;
-        BigDecimal maxWeightKg = null;
-        BigDecimal price = null;
+        BigDecimal availableVolumeCm3 = null;
+        BigDecimal availableWeightKg = null;
+        BigDecimal pricePerKg = null;
         TripStatus status = null;
         String notes = null;
         List<TripStopDto.StopResponse> stops = null;
@@ -44,14 +44,14 @@ public class TripMapperImpl implements TripMapper {
         arrival = trip.getArrival();
         departureDate = trip.getDepartureDate();
         arrivalDate = trip.getArrivalDate();
-        maxVolumeM3 = trip.getMaxVolumeM3();
-        maxWeightKg = trip.getMaxWeightKg();
-        price = trip.getPrice();
+        availableVolumeCm3 = trip.getAvailableVolumeCm3();
+        availableWeightKg = trip.getAvailableWeightKg();
+        pricePerKg = trip.getPricePerKg();
         status = trip.getStatus();
         notes = trip.getNotes();
         stops = tripStopListToStopResponseList( trip.getStops() );
 
-        TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, maxVolumeM3, maxWeightKg, price, status, notes, stops );
+        TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, availableVolumeCm3, availableWeightKg, pricePerKg, status, notes, stops );
 
         return tripResponse;
     }
@@ -64,13 +64,13 @@ public class TripMapperImpl implements TripMapper {
 
         Trip.TripBuilder trip = Trip.builder();
 
-        trip.departure( addressRequestToAddress( request.departure() ) );
-        trip.arrival( addressRequestToAddress( request.arrival() ) );
+        trip.departure( addressToGeoAddress( request.departure() ) );
+        trip.arrival( addressToGeoAddress( request.arrival() ) );
         trip.departureDate( request.departureDate() );
         trip.arrivalDate( request.arrivalDate() );
-        trip.maxVolumeM3( request.maxVolumeM3() );
-        trip.maxWeightKg( request.maxWeightKg() );
-        trip.price( request.price() );
+        trip.availableVolumeCm3( request.availableVolumeCm3() );
+        trip.availableWeightKg( request.availableWeightKg() );
+        trip.pricePerKg( request.pricePerKg() );
         trip.maxDetourKm( request.maxDetourKm() );
         trip.notes( request.notes() );
         trip.stops( stopRequestListToTripStopList( request.stops() ) );
@@ -86,27 +86,27 @@ public class TripMapperImpl implements TripMapper {
 
         if ( request.departure() != null ) {
             if ( trip.getDeparture() == null ) {
-                trip.setDeparture( Address.builder().build() );
+                trip.setDeparture( GeoAddress.builder().build() );
             }
-            addressRequestToAddress1( request.departure(), trip.getDeparture() );
+            addressToGeoAddress1( request.departure(), trip.getDeparture() );
         }
         else {
             trip.setDeparture( null );
         }
         if ( request.arrival() != null ) {
             if ( trip.getArrival() == null ) {
-                trip.setArrival( Address.builder().build() );
+                trip.setArrival( GeoAddress.builder().build() );
             }
-            addressRequestToAddress1( request.arrival(), trip.getArrival() );
+            addressToGeoAddress1( request.arrival(), trip.getArrival() );
         }
         else {
             trip.setArrival( null );
         }
         trip.setDepartureDate( request.departureDate() );
         trip.setArrivalDate( request.arrivalDate() );
-        trip.setMaxVolumeM3( request.maxVolumeM3() );
-        trip.setMaxWeightKg( request.maxWeightKg() );
-        trip.setPrice( request.price() );
+        trip.setAvailableVolumeCm3( request.availableVolumeCm3() );
+        trip.setAvailableWeightKg( request.availableWeightKg() );
+        trip.setPricePerKg( request.pricePerKg() );
         trip.setMaxDetourKm( request.maxDetourKm() );
         trip.setNotes( request.notes() );
         if ( trip.getStops() != null ) {
@@ -142,7 +142,7 @@ public class TripMapperImpl implements TripMapper {
 
         UUID id = null;
         Integer stopOrder = null;
-        Address address = null;
+        GeoAddress address = null;
 
         id = tripStop.getId();
         stopOrder = tripStop.getStopOrder();
@@ -166,19 +166,19 @@ public class TripMapperImpl implements TripMapper {
         return list1;
     }
 
-    protected Address addressRequestToAddress(AddressRequest addressRequest) {
-        if ( addressRequest == null ) {
+    protected GeoAddress addressToGeoAddress(Address address) {
+        if ( address == null ) {
             return null;
         }
 
-        Address.AddressBuilder address = Address.builder();
+        GeoAddress.GeoAddressBuilder geoAddress = GeoAddress.builder();
 
-        address.street( addressRequest.street() );
-        address.city( addressRequest.city() );
-        address.postalCode( addressRequest.postalCode() );
-        address.country( addressRequest.country() );
+        geoAddress.street( address.street() );
+        geoAddress.city( address.city() );
+        geoAddress.postalCode( address.postalCode() );
+        geoAddress.country( address.country() );
 
-        return address.build();
+        return geoAddress.build();
     }
 
     protected TripStop stopRequestToTripStop(TripStopDto.StopRequest stopRequest) {
@@ -191,7 +191,7 @@ public class TripMapperImpl implements TripMapper {
         if ( stopRequest.stopOrder() != null ) {
             tripStop.stopOrder( stopRequest.stopOrder() );
         }
-        tripStop.address( addressRequestToAddress( stopRequest.address() ) );
+        tripStop.address( addressToGeoAddress( stopRequest.address() ) );
 
         return tripStop.build();
     }
@@ -209,14 +209,14 @@ public class TripMapperImpl implements TripMapper {
         return list1;
     }
 
-    protected void addressRequestToAddress1(AddressRequest addressRequest, Address mappingTarget) {
-        if ( addressRequest == null ) {
+    protected void addressToGeoAddress1(Address address, GeoAddress mappingTarget) {
+        if ( address == null ) {
             return;
         }
 
-        mappingTarget.setStreet( addressRequest.street() );
-        mappingTarget.setCity( addressRequest.city() );
-        mappingTarget.setPostalCode( addressRequest.postalCode() );
-        mappingTarget.setCountry( addressRequest.country() );
+        mappingTarget.setStreet( address.street() );
+        mappingTarget.setCity( address.city() );
+        mappingTarget.setPostalCode( address.postalCode() );
+        mappingTarget.setCountry( address.country() );
     }
 }

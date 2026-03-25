@@ -1,14 +1,14 @@
 package com.deliveryplatform.trips;
 
 import com.deliveryplatform.common.addresses.Address;
-import com.deliveryplatform.common.addresses.AddressRequest;
+import com.deliveryplatform.common.addresses.GeoAddress;
 import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-24T05:17:53+0100",
+    date = "2026-03-25T01:34:00+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -22,7 +22,7 @@ public class TripStopMapperImpl implements TripStopMapper {
 
         UUID id = null;
         Integer stopOrder = null;
-        Address address = null;
+        GeoAddress address = null;
 
         id = tripStop.getId();
         stopOrder = tripStop.getStopOrder();
@@ -44,23 +44,23 @@ public class TripStopMapperImpl implements TripStopMapper {
         if ( request.stopOrder() != null ) {
             tripStop.stopOrder( request.stopOrder() );
         }
-        tripStop.address( addressRequestToAddress( request.address() ) );
+        tripStop.address( addressToGeoAddress( request.address() ) );
 
         return tripStop.build();
     }
 
-    protected Address addressRequestToAddress(AddressRequest addressRequest) {
-        if ( addressRequest == null ) {
+    protected GeoAddress addressToGeoAddress(Address address) {
+        if ( address == null ) {
             return null;
         }
 
-        Address.AddressBuilder address = Address.builder();
+        GeoAddress.GeoAddressBuilder geoAddress = GeoAddress.builder();
 
-        address.street( addressRequest.street() );
-        address.city( addressRequest.city() );
-        address.postalCode( addressRequest.postalCode() );
-        address.country( addressRequest.country() );
+        geoAddress.street( address.street() );
+        geoAddress.city( address.city() );
+        geoAddress.postalCode( address.postalCode() );
+        geoAddress.country( address.country() );
 
-        return address.build();
+        return geoAddress.build();
     }
 }

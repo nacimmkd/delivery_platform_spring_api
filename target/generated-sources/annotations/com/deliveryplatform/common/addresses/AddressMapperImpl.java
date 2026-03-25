@@ -5,25 +5,25 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-24T05:17:53+0100",
+    date = "2026-03-25T01:34:01+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class AddressMapperImpl implements AddressMapper {
 
     @Override
-    public Address toEntity(AddressRequest request) {
+    public GeoAddress toEntity(Address request) {
         if ( request == null ) {
             return null;
         }
 
-        Address.AddressBuilder address = Address.builder();
+        GeoAddress.GeoAddressBuilder geoAddress = GeoAddress.builder();
 
-        address.street( request.street() );
-        address.city( request.city() );
-        address.postalCode( request.postalCode() );
-        address.country( request.country() );
+        geoAddress.street( request.street() );
+        geoAddress.city( request.city() );
+        geoAddress.postalCode( request.postalCode() );
+        geoAddress.country( request.country() );
 
-        return address.build();
+        return geoAddress.build();
     }
 }

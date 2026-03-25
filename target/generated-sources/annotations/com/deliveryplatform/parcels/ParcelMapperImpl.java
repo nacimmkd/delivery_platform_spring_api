@@ -1,7 +1,7 @@
 package com.deliveryplatform.parcels;
 
 import com.deliveryplatform.common.addresses.Address;
-import com.deliveryplatform.common.addresses.AddressRequest;
+import com.deliveryplatform.common.addresses.GeoAddress;
 import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-24T05:17:54+0100",
+    date = "2026-03-25T01:34:00+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
@@ -31,8 +31,8 @@ public class ParcelMapperImpl implements ParcelMapper {
         ParcelSize size = null;
         BigDecimal price = null;
         boolean fragile = false;
-        Address pickupAddress = null;
-        Address dropoffAddress = null;
+        GeoAddress pickupAddress = null;
+        GeoAddress dropoffAddress = null;
         ParcelStatus status = null;
         LocalDate deadlineDate = null;
         OffsetDateTime createdAt = null;
@@ -69,8 +69,8 @@ public class ParcelMapperImpl implements ParcelMapper {
         parcel.fragile( parcelRequest.fragile() );
         parcel.price( parcelRequest.price() );
         parcel.deadlineDate( parcelRequest.deadlineDate() );
-        parcel.pickupAddress( addressRequestToAddress( parcelRequest.pickupAddress() ) );
-        parcel.dropoffAddress( addressRequestToAddress( parcelRequest.dropoffAddress() ) );
+        parcel.pickupAddress( addressToGeoAddress( parcelRequest.pickupAddress() ) );
+        parcel.dropoffAddress( addressToGeoAddress( parcelRequest.dropoffAddress() ) );
 
         return parcel.build();
     }
@@ -89,18 +89,18 @@ public class ParcelMapperImpl implements ParcelMapper {
         parcel.setDeadlineDate( request.deadlineDate() );
         if ( request.pickupAddress() != null ) {
             if ( parcel.getPickupAddress() == null ) {
-                parcel.setPickupAddress( Address.builder().build() );
+                parcel.setPickupAddress( GeoAddress.builder().build() );
             }
-            addressRequestToAddress1( request.pickupAddress(), parcel.getPickupAddress() );
+            addressToGeoAddress1( request.pickupAddress(), parcel.getPickupAddress() );
         }
         else {
             parcel.setPickupAddress( null );
         }
         if ( request.dropoffAddress() != null ) {
             if ( parcel.getDropoffAddress() == null ) {
-                parcel.setDropoffAddress( Address.builder().build() );
+                parcel.setDropoffAddress( GeoAddress.builder().build() );
             }
-            addressRequestToAddress1( request.dropoffAddress(), parcel.getDropoffAddress() );
+            addressToGeoAddress1( request.dropoffAddress(), parcel.getDropoffAddress() );
         }
         else {
             parcel.setDropoffAddress( null );
@@ -115,29 +115,29 @@ public class ParcelMapperImpl implements ParcelMapper {
         return user.getId();
     }
 
-    protected Address addressRequestToAddress(AddressRequest addressRequest) {
-        if ( addressRequest == null ) {
+    protected GeoAddress addressToGeoAddress(Address address) {
+        if ( address == null ) {
             return null;
         }
 
-        Address.AddressBuilder address = Address.builder();
+        GeoAddress.GeoAddressBuilder geoAddress = GeoAddress.builder();
 
-        address.street( addressRequest.street() );
-        address.city( addressRequest.city() );
-        address.postalCode( addressRequest.postalCode() );
-        address.country( addressRequest.country() );
+        geoAddress.street( address.street() );
+        geoAddress.city( address.city() );
+        geoAddress.postalCode( address.postalCode() );
+        geoAddress.country( address.country() );
 
-        return address.build();
+        return geoAddress.build();
     }
 
-    protected void addressRequestToAddress1(AddressRequest addressRequest, Address mappingTarget) {
-        if ( addressRequest == null ) {
+    protected void addressToGeoAddress1(Address address, GeoAddress mappingTarget) {
+        if ( address == null ) {
             return;
         }
 
-        mappingTarget.setStreet( addressRequest.street() );
-        mappingTarget.setCity( addressRequest.city() );
-        mappingTarget.setPostalCode( addressRequest.postalCode() );
-        mappingTarget.setCountry( addressRequest.country() );
+        mappingTarget.setStreet( address.street() );
+        mappingTarget.setCity( address.city() );
+        mappingTarget.setPostalCode( address.postalCode() );
+        mappingTarget.setCountry( address.country() );
     }
 }
