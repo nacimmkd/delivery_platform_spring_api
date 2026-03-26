@@ -2,6 +2,10 @@ package com.deliveryplatform.trips;
 
 import com.deliveryplatform.common.addresses.Address;
 import com.deliveryplatform.common.addresses.GeoAddress;
+import com.deliveryplatform.trips.dto.StopRequest;
+import com.deliveryplatform.trips.dto.StopResponse;
+import com.deliveryplatform.trips.dto.TripRequest;
+import com.deliveryplatform.trips.dto.TripResponse;
 import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,14 +17,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T21:01:01+0100",
+    date = "2026-03-26T00:59:49+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class TripMapperImpl implements TripMapper {
 
     @Override
-    public TripDto.TripResponse toResponse(Trip trip) {
+    public TripResponse toResponse(Trip trip) {
         if ( trip == null ) {
             return null;
         }
@@ -37,7 +41,7 @@ public class TripMapperImpl implements TripMapper {
         boolean instantBooking = false;
         TripStatus status = null;
         String notes = null;
-        List<TripStopDto.StopResponse> stops = null;
+        List<StopResponse> stops = null;
 
         userId = tripUserId( trip );
         id = trip.getId();
@@ -53,13 +57,13 @@ public class TripMapperImpl implements TripMapper {
         notes = trip.getNotes();
         stops = tripStopListToStopResponseList( trip.getStops() );
 
-        TripDto.TripResponse tripResponse = new TripDto.TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, availableVolumeCm3, availableWeightKg, pricePerKg, instantBooking, status, notes, stops );
+        TripResponse tripResponse = new TripResponse( id, userId, departure, arrival, departureDate, arrivalDate, availableVolumeCm3, availableWeightKg, pricePerKg, instantBooking, status, notes, stops );
 
         return tripResponse;
     }
 
     @Override
-    public Trip toEntity(TripDto.TripRequest request) {
+    public Trip toEntity(TripRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -82,7 +86,7 @@ public class TripMapperImpl implements TripMapper {
     }
 
     @Override
-    public void updateEntity(Trip trip, TripDto.TripRequest request) {
+    public void updateEntity(Trip trip, TripRequest request) {
         if ( request == null ) {
             return;
         }
@@ -139,7 +143,7 @@ public class TripMapperImpl implements TripMapper {
         return user.getId();
     }
 
-    protected TripStopDto.StopResponse tripStopToStopResponse(TripStop tripStop) {
+    protected StopResponse tripStopToStopResponse(TripStop tripStop) {
         if ( tripStop == null ) {
             return null;
         }
@@ -152,17 +156,17 @@ public class TripMapperImpl implements TripMapper {
         stopOrder = tripStop.getStopOrder();
         address = tripStop.getAddress();
 
-        TripStopDto.StopResponse stopResponse = new TripStopDto.StopResponse( id, stopOrder, address );
+        StopResponse stopResponse = new StopResponse( id, stopOrder, address );
 
         return stopResponse;
     }
 
-    protected List<TripStopDto.StopResponse> tripStopListToStopResponseList(List<TripStop> list) {
+    protected List<StopResponse> tripStopListToStopResponseList(List<TripStop> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<TripStopDto.StopResponse> list1 = new ArrayList<TripStopDto.StopResponse>( list.size() );
+        List<StopResponse> list1 = new ArrayList<StopResponse>( list.size() );
         for ( TripStop tripStop : list ) {
             list1.add( tripStopToStopResponse( tripStop ) );
         }
@@ -185,7 +189,7 @@ public class TripMapperImpl implements TripMapper {
         return geoAddress.build();
     }
 
-    protected TripStop stopRequestToTripStop(TripStopDto.StopRequest stopRequest) {
+    protected TripStop stopRequestToTripStop(StopRequest stopRequest) {
         if ( stopRequest == null ) {
             return null;
         }
@@ -200,13 +204,13 @@ public class TripMapperImpl implements TripMapper {
         return tripStop.build();
     }
 
-    protected List<TripStop> stopRequestListToTripStopList(List<TripStopDto.StopRequest> list) {
+    protected List<TripStop> stopRequestListToTripStopList(List<StopRequest> list) {
         if ( list == null ) {
             return null;
         }
 
         List<TripStop> list1 = new ArrayList<TripStop>( list.size() );
-        for ( TripStopDto.StopRequest stopRequest : list ) {
+        for ( StopRequest stopRequest : list ) {
             list1.add( stopRequestToTripStop( stopRequest ) );
         }
 

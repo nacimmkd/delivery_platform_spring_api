@@ -2,6 +2,8 @@ package com.deliveryplatform.trips;
 
 import com.deliveryplatform.common.addresses.Address;
 import com.deliveryplatform.common.addresses.GeoAddress;
+import com.deliveryplatform.trips.dto.StopRequest;
+import com.deliveryplatform.trips.dto.StopResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,14 +12,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T21:01:01+0100",
+    date = "2026-03-26T00:59:50+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class TripStopMapperImpl implements TripStopMapper {
 
     @Override
-    public TripStopDto.StopResponse toResponse(TripStop tripStop) {
+    public StopResponse toResponse(TripStop tripStop) {
         if ( tripStop == null ) {
             return null;
         }
@@ -30,19 +32,19 @@ public class TripStopMapperImpl implements TripStopMapper {
         stopOrder = tripStop.getStopOrder();
         address = tripStop.getAddress();
 
-        TripStopDto.StopResponse stopResponse = new TripStopDto.StopResponse( id, stopOrder, address );
+        StopResponse stopResponse = new StopResponse( id, stopOrder, address );
 
         return stopResponse;
     }
 
     @Override
-    public List<TripStop> toEntityList(List<TripStopDto.StopRequest> request) {
+    public List<TripStop> toEntityList(List<StopRequest> request) {
         if ( request == null ) {
             return null;
         }
 
         List<TripStop> list = new ArrayList<TripStop>( request.size() );
-        for ( TripStopDto.StopRequest stopRequest : request ) {
+        for ( StopRequest stopRequest : request ) {
             list.add( stopRequestToTripStop( stopRequest ) );
         }
 
@@ -64,7 +66,7 @@ public class TripStopMapperImpl implements TripStopMapper {
         return geoAddress.build();
     }
 
-    protected TripStop stopRequestToTripStop(TripStopDto.StopRequest stopRequest) {
+    protected TripStop stopRequestToTripStop(StopRequest stopRequest) {
         if ( stopRequest == null ) {
             return null;
         }

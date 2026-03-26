@@ -2,6 +2,9 @@ package com.deliveryplatform.parcels;
 
 import com.deliveryplatform.common.addresses.Address;
 import com.deliveryplatform.common.addresses.GeoAddress;
+import com.deliveryplatform.parcels.dto.ParcelRequest;
+import com.deliveryplatform.parcels.dto.ParcelResponse;
+import com.deliveryplatform.parcels.dto.ParcelWithCodeResponse;
 import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,14 +15,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T21:01:01+0100",
+    date = "2026-03-26T00:59:49+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class ParcelMapperImpl implements ParcelMapper {
 
     @Override
-    public ParcelDto.ParcelResponse toPublicDto(Parcel parcel) {
+    public ParcelResponse toPublicDto(Parcel parcel) {
         if ( parcel == null ) {
             return null;
         }
@@ -48,13 +51,13 @@ public class ParcelMapperImpl implements ParcelMapper {
         deadlineDate = parcel.getDeadlineDate();
         createdAt = parcel.getCreatedAt();
 
-        ParcelDto.ParcelResponse parcelResponse = new ParcelDto.ParcelResponse( id, userId, description, weightKg, size, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
+        ParcelResponse parcelResponse = new ParcelResponse( id, userId, description, weightKg, size, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelResponse;
     }
 
     @Override
-    public ParcelDto.ParcelWithCodeResponse toDto(Parcel parcel) {
+    public ParcelWithCodeResponse toDto(Parcel parcel) {
         if ( parcel == null ) {
             return null;
         }
@@ -85,13 +88,13 @@ public class ParcelMapperImpl implements ParcelMapper {
 
         UUID userId = null;
 
-        ParcelDto.ParcelWithCodeResponse parcelWithCodeResponse = new ParcelDto.ParcelWithCodeResponse( id, userId, description, weightKg, size, fragile, codeOTP, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
+        ParcelWithCodeResponse parcelWithCodeResponse = new ParcelWithCodeResponse( id, userId, description, weightKg, size, fragile, codeOTP, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelWithCodeResponse;
     }
 
     @Override
-    public Parcel toEntity(ParcelDto.ParcelRequest parcelRequest) {
+    public Parcel toEntity(ParcelRequest parcelRequest) {
         if ( parcelRequest == null ) {
             return null;
         }
@@ -110,7 +113,7 @@ public class ParcelMapperImpl implements ParcelMapper {
     }
 
     @Override
-    public void updateEntity(Parcel parcel, ParcelDto.ParcelRequest request) {
+    public void updateEntity(Parcel parcel, ParcelRequest request) {
         if ( request == null ) {
             return;
         }

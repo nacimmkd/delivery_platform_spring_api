@@ -1,18 +1,19 @@
 package com.deliveryplatform.profiles;
 
+import com.deliveryplatform.profiles.dto.ProfileRequest;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-25T21:01:00+0100",
+    date = "2026-03-26T00:59:49+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class ProfileMapperImpl implements ProfileMapper {
 
     @Override
-    public Profile toEntity(ProfileDto.ProfileRequest profileRequest) {
+    public Profile toEntity(ProfileRequest profileRequest) {
         if ( profileRequest == null ) {
             return null;
         }
