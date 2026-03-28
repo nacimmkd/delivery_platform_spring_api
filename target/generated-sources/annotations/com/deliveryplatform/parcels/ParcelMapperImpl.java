@@ -4,7 +4,6 @@ import com.deliveryplatform.common.addresses.Address;
 import com.deliveryplatform.common.addresses.GeoAddress;
 import com.deliveryplatform.parcels.dto.ParcelRequest;
 import com.deliveryplatform.parcels.dto.ParcelResponse;
-import com.deliveryplatform.parcels.dto.ParcelWithCodeResponse;
 import com.deliveryplatform.users.User;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,14 +14,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-26T16:46:40+0100",
+    date = "2026-03-28T05:43:41+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class ParcelMapperImpl implements ParcelMapper {
 
     @Override
-    public ParcelResponse toPublicDto(Parcel parcel) {
+    public ParcelResponse toDto(Parcel parcel) {
         if ( parcel == null ) {
             return null;
         }
@@ -54,43 +53,6 @@ public class ParcelMapperImpl implements ParcelMapper {
         ParcelResponse parcelResponse = new ParcelResponse( id, userId, description, weightKg, size, fragile, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
 
         return parcelResponse;
-    }
-
-    @Override
-    public ParcelWithCodeResponse toDto(Parcel parcel) {
-        if ( parcel == null ) {
-            return null;
-        }
-
-        UUID id = null;
-        String description = null;
-        BigDecimal weightKg = null;
-        ParcelSize size = null;
-        boolean fragile = false;
-        String codeOTP = null;
-        GeoAddress pickupAddress = null;
-        GeoAddress dropoffAddress = null;
-        ParcelStatus status = null;
-        LocalDate deadlineDate = null;
-        OffsetDateTime createdAt = null;
-
-        id = parcel.getId();
-        description = parcel.getDescription();
-        weightKg = parcel.getWeightKg();
-        size = parcel.getSize();
-        fragile = parcel.isFragile();
-        codeOTP = parcel.getCodeOTP();
-        pickupAddress = parcel.getPickupAddress();
-        dropoffAddress = parcel.getDropoffAddress();
-        status = parcel.getStatus();
-        deadlineDate = parcel.getDeadlineDate();
-        createdAt = parcel.getCreatedAt();
-
-        UUID userId = null;
-
-        ParcelWithCodeResponse parcelWithCodeResponse = new ParcelWithCodeResponse( id, userId, description, weightKg, size, fragile, codeOTP, pickupAddress, dropoffAddress, status, deadlineDate, createdAt );
-
-        return parcelWithCodeResponse;
     }
 
     @Override
