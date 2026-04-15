@@ -1,22 +1,30 @@
+image: docker:27
+
+services:
+  - docker:27-dind
+
+variables:
+  IMAGE_NAME: delivery-backend
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+
 stages:
-  - init
   - build
-  - package
+  - push
 
-init:
-  stage: init
-  image: alpine:latest
-  script:
-    - echo "starting ci pipeline"
-
-build:
+build_images:
   stage: build
-  image: maven:3.9-eclipse-temurin-17
   script:
-    - mvn clean compile
+    - docker build -t "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" .
+    - docker save "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG" > image.tar
+  artifacts:
+    paths:
+      - image.tar
+    expire_in: 20 minutes
 
-package:
-  stage: package
-  image: maven:3.9-eclipse-temurin-17
+
+deploy_to_hub:
+  stage: push
   script:
-    - mvn clean package -DskipTests
+    - docker load < image.tar
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - docker push "$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
