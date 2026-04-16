@@ -1,30 +1,11 @@
-image: docker:27
-
-services:
-  - docker:27-dind
-
-variables:
-  IMAGE_NAME: delivery-backend
-  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
 
 stages:
-  - build
-  - push
+  - setup
 
-build_images:
-  stage: build
+setup:
+  stage: setup
+  image: alpine:latest
   script:
-    - docker build -t "$DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG" .
-    - docker save "$DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG" > image.tar
-  artifacts:
-    paths:
-      - image.tar
-    expire_in: 20 minutes
-
-
-deploy_to_hub:
-  stage: push
-  script:
-    - docker load < image.tar
-    - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PASSWORD"
-    - docker push "$DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG"
+    - echo "exporting variables..."
+    - export (grep -v '^#' .env.example | xargs)
+    - echo $DB_URL
