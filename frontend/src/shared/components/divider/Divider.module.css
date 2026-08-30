@@ -1,0 +1,41 @@
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: color-mix(in srgb, var(--color-ink) 47%, transparent);
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 5px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-ink) 20%, transparent);
+}
+
+/* si pas de texte => ligne simple */
+.divider:not(:has(.dividerText))::before {
+    display: none;
+}
+
+.dividerText {
+    white-space: nowrap;
+}
+
+/* ---------- vertical ---------- */
+.vertical {
+    flex-direction: column;
+    align-self: stretch;
+    margin: 0 5px;
+    padding: 0 5px;
+}
+
+.vertical::before,
+.vertical::after {
+    width: 1px;
+    height: auto;
+}

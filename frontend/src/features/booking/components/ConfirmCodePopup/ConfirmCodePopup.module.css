@@ -1,0 +1,12 @@
+.actions {
+    margin-top: 16px;
+}
+
+.codeGroup {
+    width: 100%;
+}
+
+.codeGroup > *:last-child {
+    flex: 1;
+    min-width: 0;
+}

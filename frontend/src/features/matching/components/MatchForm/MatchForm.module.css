@@ -1,0 +1,117 @@
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.fields {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 10px 10px 24px;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-taupe) 14%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-espresso) 8%, transparent);
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.fields:hover {
+    border-color: color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+
+.fields:focus-within {
+    border-color: color-mix(in srgb, var(--color-ink) 45%, transparent);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--color-espresso) 16%, transparent);
+}
+
+.field {
+    flex: 1;
+    min-width: 70%;
+}
+
+.field input {
+    height: 48px;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    padding-left: 4px;
+    border-radius: 0;
+}
+
+.field input:focus {
+    box-shadow: none;
+}
+
+.field input[type="date"]::-webkit-datetime-edit {
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.field input[type="date"]::-webkit-datetime-edit-text {
+    color: color-mix(in srgb, var(--color-espresso) 45%, transparent);
+    padding: 0 3px;
+}
+
+.field input[type="date"]::-webkit-datetime-edit-day-field,
+.field input[type="date"]::-webkit-datetime-edit-month-field,
+.field input[type="date"]::-webkit-datetime-edit-year-field {
+    border-radius: 4px;
+    padding: 1px 2px;
+}
+
+.field input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.field input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.field input[type="date"]::-webkit-datetime-edit-year-field:focus {
+    background-color: color-mix(in srgb, var(--color-ink) 12%, transparent);
+    color: var(--color-ink);
+    outline: none;
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.8;
+    padding: 6px;
+    margin-left: 10px;
+    border-radius: 8px;
+    background-color: color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background-color: color-mix(in srgb, var(--color-ink) 16%, transparent);
+}
+
+.submit {
+    flex-shrink: 0;
+    height: 48px;
+    box-sizing: border-box;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+@media (max-width: 640px) {
+    .fields {
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .field input {
+        background: var(--color-white);
+        border: 1px solid var(--color-sand);
+        border-radius: 14px;
+        padding-left: 14px;
+    }
+
+    .field input:focus {
+        border-color: color-mix(in srgb, var(--color-ink) 45%, transparent);
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-ink) 32%, transparent);
+    }
+
+    .submit {
+        width: 100%;
+    }
+}

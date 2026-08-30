@@ -1,0 +1,7 @@
+.code {
+    padding: 16px;
+    margin: 8px 0;
+    background: var(--color-surface);
+    border-radius: 12px;
+    letter-spacing: 2px;
+}

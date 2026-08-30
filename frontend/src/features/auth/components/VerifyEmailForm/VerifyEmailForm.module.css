@@ -1,0 +1,22 @@
+.heading {
+    text-align: center;
+}
+
+.resend {
+    color: var(--color-espresso);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+}
+
+.resend:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+    .container.container {
+        padding: 28px 22px;
+    }
+}

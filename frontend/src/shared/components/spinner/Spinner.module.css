@@ -1,0 +1,54 @@
+.spinner {
+    animation: spin 800ms linear infinite;
+    transform-origin: center;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinnerPulse circle {
+    animation: dash 1.4s ease-in-out infinite;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 4, 40.8;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 30, 40.8;
+        stroke-dashoffset: -8;
+    }
+    100% {
+        stroke-dasharray: 4, 40.8;
+        stroke-dashoffset: -40;
+    }
+}
+
+/* Bouton pendant le chargement */
+.submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.submit:disabled:hover {
+    scale: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: fade 1s ease-in-out infinite alternate;
+    }
+
+    .spinnerPulse circle {
+        animation: none;
+    }
+}
+
+@keyframes fade {
+    from { opacity: 0.4; }
+    to   { opacity: 1; }
+}

@@ -1,0 +1,88 @@
+
+.container {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: color-mix(in srgb, var(--color-espresso) 18%, transparent);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    animation: fadeIn 220ms ease-out;
+}
+
+.element {
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px color-mix(in srgb, var(--color-espresso) 20%, transparent);
+
+    animation: slideUp 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* ---- Animations --------------------------------------------- */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        /* monte et grandit legerement : effet d'apparition */
+        transform: translateY(16px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ---- Responsive --------------------------------------------- */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0;
+        /* plein ecran sur mobile : plus confortable qu'une carte etroite */
+        align-items: flex-end;
+    }
+
+    .element {
+        max-width: none;
+        max-height: 92vh;
+        border-radius: 24px 24px 0 0;
+        padding: 28px 20px 32px;
+        animation: slideUpMobile 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+}
+
+@keyframes slideUpMobile {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Respecte le reglage systeme "reduire les animations" */
+@media (prefers-reduced-motion: reduce) {
+    .container,
+    .element {
+        animation: none;
+    }
+}

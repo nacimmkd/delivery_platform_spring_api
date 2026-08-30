@@ -1,0 +1,78 @@
+.briefRoute {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+}
+
+.briefPoint {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.briefPointRight {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.briefLabel {
+    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.briefStreet {
+    font-size: clamp(0.75rem, 2.4vw, 0.9rem);
+    color: var(--color-black);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.briefAddress {
+    font-size: clamp(0.85rem, 3vw, 1.2rem);
+    color: var(--color-black);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.briefCountry {
+    font-size: clamp(0.7rem, 2.4vw, 0.85rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.briefDate {
+    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+}
+
+.routeLine {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 32px;
+}
+
+.routeTrack {
+    flex: 1;
+    height: 2px;
+    min-width: 8px;
+    background: color-mix(in srgb, var(--color-ink) 22%, transparent);
+}
+
+.routeDot {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-ink);
+}

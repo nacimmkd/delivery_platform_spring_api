@@ -1,0 +1,88 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-sizing: border-box;
+    gap: 16px;
+    padding: 24px;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-taupe) 12%, transparent);
+    border-radius: 20px;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    flex: 1;
+    gap: 14px;
+    padding-bottom: 22px;
+}
+
+.step:last-child {
+    flex: 0;
+    padding-bottom: 0;
+}
+
+.step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 22px;
+    bottom: 0;
+    width: 1px;
+    background: color-mix(in srgb, var(--color-taupe) 30%, transparent);
+}
+
+.step.done:not(:last-child)::before {
+    background: var(--color-ink);
+}
+
+.dot {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    border: 2px solid color-mix(in srgb, var(--color-taupe) 30%, transparent);
+    color: var(--color-white);
+    z-index: 1;
+}
+
+.step.done .dot {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+}
+
+.step.current .dot {
+    border-color: var(--color-ink);
+    background: var(--color-white);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-ink) 12%, transparent);
+}
+
+.step_body {
+    padding-top: 1px;
+}
+
+.step:not(.done):not(.current) .step_body p {
+    color: var(--color-taupe);
+}
+
+.cancelled {
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--color-danger-surface);
+    border: 1px solid var(--color-danger-border);
+    color: var(--color-danger-text);
+}

@@ -1,0 +1,22 @@
+.actions {
+    margin-top: 8px;
+}
+
+.stars {
+    padding: 6px 0;
+}
+
+.starButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 120ms ease;
+}
+
+.starButton:hover {
+    transform: scale(1.15);
+}

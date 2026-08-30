@@ -1,0 +1,108 @@
+.container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--color-blob-peach);
+    overflow: hidden;
+}
+
+.track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ---------- arrows ---------- */
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(4px);
+    color: var(--color-taupe);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.container:hover .arrow,
+.container:focus-within .arrow {
+    opacity: 1;
+}
+
+.arrow:hover {
+    background: var(--color-surface);
+}
+
+.arrow_left {
+    left: 10px;
+}
+
+.arrow_right {
+    right: 10px;
+}
+
+/* ---------- dots ---------- */
+
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border-radius: 100px;
+    background: color-mix(in srgb, var(--color-ink) 25%, transparent);
+    backdrop-filter: blur(2px);
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: color-mix(in srgb, var(--color-white) 60%, transparent);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dot_active {
+    background: var(--color-white);
+    transform: scale(1.3);
+}
+
+/* ---------- touch: flèches toujours visibles, pas de survol disponible ---------- */
+
+@media (hover: none) {
+    .arrow {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .track,
+    .arrow,
+    .dot {
+        transition: none;
+    }
+}

@@ -1,0 +1,64 @@
+.page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.card {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 32px;
+    box-sizing: border-box;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-taupe) 12%, transparent);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px color-mix(in srgb, var(--color-espresso) 14%, transparent);
+}
+
+.checkout {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.iconBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 4px;
+    border-radius: 50%;
+    background: var(--color-chip-cream);
+    color: var(--color-espresso);
+}
+
+.successIcon {
+    color: var(--color-success);
+}
+
+.errorIcon {
+    color: var(--color-danger);
+}
+
+@media (max-width: 560px) {
+    .page {
+        padding: 20px 16px;
+    }
+
+    .card {
+        padding: 20px 22px;
+        border-radius: 20px;
+    }
+}

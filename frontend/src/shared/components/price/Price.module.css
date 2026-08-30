@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.horizontal {
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.align_left {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.align_center {
+    align-items: center;
+    text-align: center;
+}
+
+.align_right {
+    align-items: flex-end;
+    text-align: right;
+}

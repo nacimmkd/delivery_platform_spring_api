@@ -1,0 +1,96 @@
+.card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-taupe) 12%, transparent);
+    border-radius: 20px;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-espresso) 8%, transparent);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        140px 140px at 100% 0%,
+        color-mix(in srgb, var(--color-blob-peach) 55%, transparent) 0%,
+        transparent 70%
+    );
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.card:hover {
+    box-shadow: 0 14px 30px color-mix(in srgb, var(--color-espresso) 16%, transparent);
+    transform: translateY(-2px);
+}
+
+.iconBadge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-blob-peach) 0%, var(--color-chip-cream) 100%);
+    color: var(--color-espresso);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-espresso) 14%, transparent);
+}
+
+.body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.arrow {
+    position: relative;
+    flex-shrink: 0;
+    color: var(--color-espresso);
+    transition: transform 220ms ease;
+}
+
+.card:hover .arrow {
+    transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .arrow {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+
+    .card:hover .arrow {
+        transform: none;
+    }
+}

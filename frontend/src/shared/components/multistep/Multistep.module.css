@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+}
+
+/* ---------- progress ---------- */
+
+.progress {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.track {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-ink) 15%, transparent);
+    z-index: 0;
+}
+
+.trackDone {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    height: 1px;
+    background: var(--color-chip-peach);
+    z-index: 0;
+    transition: width 180ms ease;
+}
+
+/* ---------- content ---------- */
+
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 250ms ease both;
+}
+
+/* ---------- actions ---------- */
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .content {
+        animation: none;
+    }
+    .trackDone {
+        transition: none;
+    }
+}

@@ -1,0 +1,102 @@
+.container * {
+   animation: slowDisplay 1000ms ease both;
+}
+
+/* ---- Heading ------------------------------------------------- */
+
+.heading {
+    text-align: center;
+}
+
+/* ---- Formulaire ---------------------------------------------- */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.row > * {
+    flex: 1;
+    min-width: 0;
+}
+
+.toggle {
+    cursor: pointer;
+    color: var(--color-taupe);
+    transition: color 150ms ease;
+}
+
+.toggle:hover {
+    color: var(--color-espresso);
+}
+
+/* ---- Terms --------------------------------------------------- */
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-ink);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ---- Footer -------------------------------------------------- */
+
+.footer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-taupe);
+    margin: 0;
+}
+
+.link {
+    color: var(--color-espresso);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---- Responsive ---------------------------------------------- */
+
+@media (max-width: 480px) {
+    .container.container {
+        padding: 28px 22px;
+    }
+
+    .title {
+        font-size: 1.625rem;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+/* ---- Animations ---------------------------------------------- */
+
+@keyframes slowDisplay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,130 @@
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    background: var(--color-cream);
+    border: 1px solid color-mix(in srgb, var(--color-taupe) 12%, transparent);
+    border-radius: 16px;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-espresso) 8%, transparent);
+    transition: box-shadow 0.2s ease;
+}
+
+.container:hover {
+    box-shadow: 0 10px 22px color-mix(in srgb, var(--color-espresso) 14%, transparent);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.tag ~ .left_container {
+    padding-top: 40px;
+}
+
+.divider {
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+/* ---------- left: trip ---------- */
+
+.left_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 5;
+    min-width: 0;
+}
+
+/* ---------- middle: carrier ---------- */
+
+.middle_container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1.5;
+    min-width: 0;
+    padding: 8px;
+    margin: -8px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease;
+}
+
+.middle_container:hover {
+    background-color: var(--color-surface);
+}
+
+/* ---------- right: state / price / pay ---------- */
+
+.right_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.actions {
+    flex-shrink: 0;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 768px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 14px;
+        padding: 18px;
+    }
+
+    .tag {
+        position: static;
+        order: -2;
+        align-self: flex-start;
+    }
+
+    .left_container,
+    .tag ~ .left_container {
+        flex: 1 1 100%;
+        order: -1;
+        padding-top: 0;
+        padding-bottom: 14px;
+        border-bottom: 1px solid color-mix(in srgb, var(--color-taupe) 14%, transparent);
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .middle_container {
+        flex: 0 1 auto;
+        order: 1;
+    }
+
+    .right_container {
+        display: contents;
+    }
+
+    .price_container {
+        flex: 0 1 auto;
+        order: 2;
+    }
+
+    .actions {
+        flex: 1 1 100%;
+        order: 3;
+    }
+}

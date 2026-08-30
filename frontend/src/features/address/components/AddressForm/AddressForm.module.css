@@ -1,0 +1,76 @@
+.field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+}
+
+.label {
+    color: var(--color-black);
+}
+
+.spinner {
+    color: var(--color-taupe);
+    animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ---------- dropdown ---------- */
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: 240px;
+    overflow-y: auto;
+    background: var(--color-white);
+    border: 1px solid var(--color-sand);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px color-mix(in srgb, var(--color-espresso) 14%, transparent);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--color-espresso);
+    cursor: pointer;
+    transition: background 120ms ease;
+}
+
+.option svg {
+    flex-shrink: 0;
+    color: var(--color-taupe);
+}
+
+.option:hover,
+.optionActive {
+    background: var(--color-surface);
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+    .option {
+        transition: none;
+    }
+}

@@ -1,0 +1,149 @@
+.field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-espresso);
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 14px;
+    font: inherit;
+    font-weight: 500;
+    color: var(--color-espresso);
+    background: var(--color-white);
+    border: 1px solid var(--color-sand);
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.trigger:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--color-espresso) 40%, transparent);
+}
+
+.trigger:focus-visible,
+.triggerOpen {
+    outline: none;
+    border-color: color-mix(in srgb, var(--color-espresso) 76%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-espresso) 32%, transparent);
+}
+
+.trigger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-surface);
+}
+
+.triggerLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chevron {
+    flex-shrink: 0;
+    color: var(--color-taupe);
+    transition: transform 160ms ease;
+}
+
+.triggerOpen .chevron {
+    transform: rotate(180deg);
+}
+
+/* ---------- pill variant ---------- */
+
+.pill {
+    background: transparent;
+    border-color: var(--color-sand);
+    border-radius: 100px;
+    padding: 10px 16px;
+    gap: 6px;
+}
+
+.pill:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-espresso) 6%, transparent);
+    border-color: color-mix(in srgb, var(--color-espresso) 20%, transparent);
+}
+
+.pill:disabled {
+    background: transparent;
+}
+
+.triggerError {
+    border-color: var(--color-danger);
+}
+
+.triggerError:focus-visible {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-danger) 32%, transparent);
+}
+
+.error {
+    font-size: 0.8rem;
+    color: var(--color-danger);
+}
+
+/* ---------- dropdown ---------- */
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    max-height: 260px;
+    overflow-y: auto;
+    background: var(--color-white);
+    border: 1px solid var(--color-sand);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px color-mix(in srgb, var(--color-espresso) 14%, transparent);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    animation: dropdownIn 140ms ease both;
+}
+
+@keyframes dropdownIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+    .dropdown {
+        top: auto;
+        bottom: calc(100% + 6px);
+        max-height: min(260px, 40vh);
+        animation: dropdownInUp 140ms ease both;
+    }
+}
+
+@keyframes dropdownInUp {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trigger,
+    .chevron {
+        transition: none;
+    }
+    .dropdown {
+        animation: none;
+    }
+}

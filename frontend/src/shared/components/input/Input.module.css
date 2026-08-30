@@ -1,0 +1,137 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+}
+
+/* --- Label row --- */
+
+.labelRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-espresso);
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--color-taupe);
+}
+
+/* --- Input --- */
+
+.input {
+    padding: 11px 14px;
+    font: inherit;
+    color: var(--color-espresso);
+    background: var(--color-white);
+    border: 1px solid var(--color-sand);
+    border-radius: 12px;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input::placeholder {
+    color: color-mix(in srgb, var(--color-espresso) 36%, transparent);
+}
+
+.input:focus {
+    outline: none;
+    border-color: color-mix(in srgb, var(--color-espresso) 76%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-espresso) 32%, transparent);
+}
+
+.input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-surface);
+}
+
+/* --- Error state --- */
+
+.inputError {
+    border-color: var(--color-danger);
+}
+
+.inputError:focus {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-danger) 32%, transparent);
+}
+
+.error {
+    font-size: 0.8rem;
+    color: var(--color-danger);
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.inputWithSuffix {
+    padding-right: 44px;
+    width: 100%;
+}
+
+/* --- Date input --- */
+
+.input[type="date"] {
+    position: relative;
+    cursor: pointer;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    border-radius: 6px;
+    opacity: 0.6;
+    transition: opacity 160ms ease, background-color 160ms ease;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background-color: var(--color-surface);
+}
+
+.input[type="date"]::-webkit-datetime-edit {
+    color: var(--color-espresso);
+}
+
+.input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+.input[type="date"]:not(:valid)::-webkit-datetime-edit {
+    color: color-mix(in srgb, var(--color-espresso) 36%, transparent);
+}
+
+.suffix {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+    .input {
+        transition: none;
+    }
+}

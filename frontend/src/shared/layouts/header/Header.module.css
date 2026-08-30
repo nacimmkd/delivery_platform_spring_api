@@ -1,0 +1,119 @@
+.container {
+    position: relative;
+    z-index: 100;
+
+    width: min(1140px, 100% - 20px);
+    height: 70px;
+    margin: 20px auto;
+    padding-inline: 24px 20px;
+    background-color: var(--color-black);
+    border-radius: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ---- Left ---------------------------------------------------- */
+
+.left_container {
+    display: flex;
+    align-items: center;
+}
+
+.logo_container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo_text::first-letter {
+    color: var(--color-chip-cream);
+}
+
+/* ---- Right --------------------------------------------------- */
+
+.right_container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login_container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login_container * {
+    padding: 10px 20px;
+    border-radius: 60px;
+    font-size: 0.875rem;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login_button {
+    height: 100%;
+    color: var(--color-white);
+    background: transparent;
+    border: none;
+    transition: font-size 180ms ease;
+}
+
+.login_button:hover {
+    font-size: 0.95rem;
+}
+
+.signin_button {
+    color: var(--color-black);
+    background: var(--color-white);
+    border: 1px solid color-mix(in srgb, var(--color-white) 25%, transparent);
+    transition: transform 180ms ease;
+}
+
+.signin_button:hover {
+    transform: scale(1.05);
+}
+
+/* ---- menu --------------------------- */
+
+.profile_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 4px;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: background 180ms ease;
+}
+
+.profile_container:hover {
+    background: color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.profile_container img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-chip-cream);
+}
+
+/* ---- Responsive ---------------------------------------------- */
+
+@media (max-width: 640px) {
+    .container {
+        height: 54px;
+        padding-inline: 8px;
+    }
+
+    .login_button {
+        display: none;
+    }
+
+}

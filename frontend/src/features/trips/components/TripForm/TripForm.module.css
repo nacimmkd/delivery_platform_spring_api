@@ -1,0 +1,89 @@
+.container {
+    width: min(720px, 100%);
+    padding: 36px 32px;
+    background-color: var(--color-cream);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px color-mix(in srgb, var(--color-espresso) 16%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: slideUp 400ms ease both;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- heading ---------- */
+
+.heading {
+    text-align: center;
+}
+
+.subtitle {
+    color: var(--color-black);
+}
+
+/* ---------- form ---------- */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.trip_details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ligne {
+    display: flex;
+    gap: 12px;
+}
+
+.ligne > * {
+    flex: 1;
+    min-width: 0;
+}
+
+.unit {
+    font-size: 0.85rem;
+    color: var(--color-black);
+}
+
+/* ---------- addresses ---------- */
+
+.addresses_row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---------- notes ---------- */
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+    .container {
+        padding: 28px 22px;
+    }
+
+    .ligne {
+        flex-direction: column;
+    }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .container {
+        animation: none;
+    }
+
+    .notes_input {
+        transition: none;
+    }
+}

@@ -1,0 +1,40 @@
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-espresso);
+    cursor: pointer;
+    transition: background 120ms ease;
+}
+
+.option:hover,
+.optionActive {
+    background: var(--color-surface);
+}
+
+.optionSelected {
+    background: var(--color-chip-peach);
+    color: var(--color-ink);
+    font-weight: 600;
+}
+
+.optionSelected.optionActive,
+.optionSelected:hover {
+    background: var(--color-chip-peach);
+}
+
+.optionDisabled {
+    color: var(--color-taupe);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.check {
+    flex-shrink: 0;
+    color: var(--color-ink);
+}

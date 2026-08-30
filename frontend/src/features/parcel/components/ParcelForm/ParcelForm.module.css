@@ -1,0 +1,107 @@
+.container {
+    width: min(720px, 100%);
+    padding: 36px 32px;
+    background-color: var(--color-cream);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px color-mix(in srgb, var(--color-espresso) 16%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: slideUp 400ms ease both;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- heading ---------- */
+
+.heading {
+    text-align: center;
+}
+
+.subtitle {
+    color: var(--color-black);
+}
+
+/* ---------- form ---------- */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.parcel_details,
+.shipment {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section_title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.ligne {
+    display: flex;
+    gap: 12px;
+}
+
+.ligne > * {
+    flex: 1;
+    min-width: 0;
+}
+
+.unit {
+    font-size: 0.85rem;
+    color: var(--color-black);
+}
+
+/* ---------- fragile toggle ---------- */
+
+.fragile_toggle {
+    --toggle-bg: var(--color-gray);
+    --toggle-bg-hover: var(--color-gray);
+    --toggle-bg-checked: var(--color-chip-peach);
+    --toggle-bg-checked-hover: var(--color-chip-peach);
+}
+
+/* ---------- addresses ---------- */
+
+.addresses_row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buttons_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+    .container {
+        padding: 28px 22px;
+    }
+
+    .ligne {
+        flex-direction: column;
+    }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .container {
+        animation: none;
+    }
+}

@@ -1,0 +1,82 @@
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--toggle-bg, var(--color-surface));
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background 160ms ease;
+}
+
+.row:hover {
+    background: var(--toggle-bg-hover, var(--toggle-bg, var(--color-surface)));
+}
+
+.row:has(.input:checked) {
+    background: var(--toggle-bg-checked, var(--toggle-bg, var(--color-surface)));
+}
+
+.row:has(.input:checked):hover {
+    background: var(--toggle-bg-checked-hover, var(--toggle-bg-checked, var(--toggle-bg, var(--color-surface))));
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.toggle {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.track {
+    display: inline-flex;
+    align-items: center;
+    width: 44px;
+    height: 26px;
+    padding: 3px;
+    background: var(--color-black);
+    border: 1px solid var(--color-black);
+    border-radius: 100px;
+    box-sizing: border-box;
+}
+
+.thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-white);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--color-espresso) 25%, transparent);
+    transition: transform 180ms ease;
+}
+
+.input:checked + .track .thumb {
+    transform: translateX(18px);
+}
+
+.input:focus-visible + .track {
+    outline: 2px solid color-mix(in srgb, var(--color-espresso) 76%, transparent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .row,
+    .track,
+    .thumb {
+        transition: none;
+    }
+}

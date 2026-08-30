@@ -1,0 +1,152 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 60px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    border: none;
+    transition: all 180ms ease;
+}
+
+.button:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* --- Variants --- */
+
+.main {
+    background: var(--color-ink);
+    color: var(--color-white);
+}
+
+.main:hover:not(:disabled) {
+    opacity: 0.88;
+    transform: scale(1.01);
+}
+
+.main svg {
+    transition: transform 200ms ease;
+}
+
+.main:hover:not(:disabled) svg {
+    transform: translate(2px, -2px);
+}
+
+.secondary {
+    background: var(--color-white);
+    color: var(--color-ink);
+    border: 1px solid var(--color-sand);
+}
+
+.secondary:hover:not(:disabled) {
+    background: var(--color-surface);
+    transform: scale(1.04);
+}
+
+.danger {
+    color: var(--color-danger);
+    background: var(--color-danger-surface);
+}
+
+.danger:hover {
+    background: var(--color-danger-surface-hover);
+}
+
+.ghost {
+    color: var(--color-black);
+    background-color: transparent;
+    animation: none;
+}
+
+.ghost:active {
+    color: var(--color-white);
+    background-color: var(--color-ink);
+}
+
+.ghost:hover {
+    color: var(--color-white);
+    background-color: var(--color-ink);
+}
+
+/* --- Sizes --- */
+
+.sm {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+}
+
+.md {
+    padding: 11px 20px;
+    font-size: 0.9rem;
+}
+
+.lg {
+    padding: 12px 26px;
+    font-size: 1rem;
+}
+
+.iconOnly {
+    padding: 0;
+    gap: 0;
+    flex-shrink: 0;
+}
+
+.iconOnly.sm {
+    width: 28px;
+    height: 28px;
+}
+
+.iconOnly.md {
+    width: 34px;
+    height: 34px;
+}
+
+.iconOnly.lg {
+    width: 40px;
+    height: 40px;
+}
+
+/* --- Modifiers --- */
+
+.fullWidth {
+    width: 100%;
+}
+
+.fullWidth:hover:not(:disabled) {
+    transform: none;
+}
+
+.loading {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+    .button,
+    .main svg {
+        transition: none;
+    }
+
+    .main:hover:not(:disabled),
+    .secondary:hover:not(:disabled) {
+        transform: none;
+        scale: 1;
+    }
+}
