@@ -40,8 +40,6 @@ services:
     container_name: ecolis-frontend
     depends_on:
       - backend
-    env_file:
-      - frontend/.env
     ports:
       - "80:80"
     restart: unless-stopped
