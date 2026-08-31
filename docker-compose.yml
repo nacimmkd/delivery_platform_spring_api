@@ -26,7 +26,7 @@ services:
     env_file:
       - backend/.env
     environment:
-      - FRONTEND_BASE_URL=http://localhost:80
+      - FRONTEND_BASE_URL=http://localhost
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -35,7 +35,8 @@ services:
     build:
       context: frontend
       args:
-        VITE_API_URL: http://localhost:8080
+        API_URL: http://localhost:8080
+        STRIPE_PUBLISHABLE_KEY: ${VITE_STRIPE_PUBLISHABLE_KEY}
     container_name: ecolis-frontend
     depends_on:
       - backend
